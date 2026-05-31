@@ -6,8 +6,10 @@
 
 **L'assistant IA de l'agence. Vidéo, Ads, Agents, Sites web, SEO — préconfiguré, prêt en 60 secondes.**
 
+[![Télécharger](https://img.shields.io/badge/⬇_Télécharger-Rec._.exe-FF3B3B?style=for-the-badge)](https://github.com/Makooff/rec-studio/releases/latest)
+
 [![Windows](https://img.shields.io/badge/Windows-prêt-FF3B3B?style=flat-square&logo=windows)](https://github.com/Makooff/rec-studio/releases)
-[![macOS](https://img.shields.io/badge/macOS-bientôt-555?style=flat-square&logo=apple)](#)
+[![macOS](https://img.shields.io/badge/macOS-prêt-FF3B3B?style=flat-square&logo=apple)](https://github.com/Makooff/rec-studio/releases)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-inclus-FF3B3B?style=flat-square)](https://claude.ai/code)
 
 </div>
@@ -113,11 +115,39 @@ Clique **Choisir le dossier**, sélectionne ton projet → Claude Code s'ouvre, 
 ## Build local (développeurs)
 
 ```powershell
-# Windows
+# Installateur
 .\build.ps1
 
-# macOS
-bash build.sh
+# App chat
+cd app
+npm install
+npm run build-win   # Windows .exe
+npm run build-mac   # macOS .dmg
+```
+
+---
+
+## Déploiement (publier une version pour l'équipe)
+
+Le déploiement est **automatique** via GitHub Actions. Push un tag → le `.exe` et le `.dmg` se build seuls et apparaissent dans [Releases](https://github.com/Makooff/rec-studio/releases).
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+→ GitHub build Windows + macOS, publie les fichiers. L'équipe télécharge le `.exe` depuis la page Releases.
+
+**Mettre à jour le code du repo :**
+```bash
+git add -A
+git commit -m "feat: ma modif"
+git push origin main
+```
+
+**Nouvelle version à distribuer :** incrémente la version dans `app/package.json`, commit, puis tag :
+```bash
+git tag v1.0.1 && git push origin v1.0.1
 ```
 
 ---

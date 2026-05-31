@@ -15,7 +15,8 @@
     "files": ["**/*", "!dist"],
     "win": { "target": "nsis", "icon": "assets/icon.png" },
     "mac": { "target": "dmg", "icon": "assets/icon.icns" },
-    "nsis": { "oneClick": true, "perMachine": false }
+    "nsis": { "oneClick": true, "perMachine": false },
+    "publish": { "provider": "github", "owner": "Makooff", "repo": "rec-studio" }
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.0"
