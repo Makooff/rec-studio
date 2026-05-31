@@ -2,6 +2,7 @@
   "name": "rec-studio-app",
   "version": "1.0.0",
   "description": "Rec. — App chat Claude pour Nova",
+  "author": "Nova",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
