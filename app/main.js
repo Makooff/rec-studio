@@ -104,6 +104,43 @@ ipcMain.handle('delete-agent', (_e, projectPath, id) => {
   return true
 })
 
+// ---- MCP servers (21st.dev Magic, Context7, Playwright) ----
+// Keys read from env or rec-config.json in userData.
+function readConfig() {
+  try { return JSON.parse(fs.readFileSync(path.join(app.getPath('userData'), 'rec-config.json'), 'utf8')) } catch { return {} }
+}
+function buildMcpServers() {
+  const cfg = readConfig()
+  const servers = {}
+  const magicKey = process.env.MAGIC_API_KEY || process.env.TWENTYFIRST_API_KEY || cfg.magicKey
+  if (magicKey) {
+    servers.magic = {
+      type: 'stdio',
+      command: process.platform === 'win32' ? 'npx.cmd' : 'npx',
+      args: ['-y', '@21st-dev/magic@latest'],
+      env: { ...process.env, API_KEY: magicKey },
+    }
+  }
+  return servers
+}
+// 21st.dev Magic tool names — appended to allowedTools so restricted agents keep UI generation
+const MAGIC_TOOLS = [
+  'mcp__magic__21st_magic_component_builder',
+  'mcp__magic__21st_magic_component_inspiration',
+  'mcp__magic__21st_magic_component_refiner',
+  'mcp__magic__logo_search',
+]
+
+ipcMain.handle('get-config', () => {
+  const cfg = readConfig()
+  return { hasMagic: !!(process.env.MAGIC_API_KEY || process.env.TWENTYFIRST_API_KEY || cfg.magicKey) }
+})
+ipcMain.handle('save-config', (_e, patch) => {
+  const cfg = { ...readConfig(), ...patch }
+  fs.writeFileSync(path.join(app.getPath('userData'), 'rec-config.json'), JSON.stringify(cfg, null, 2))
+  return { hasMagic: !!cfg.magicKey }
+})
+
 // ---- chat: streaming query via Claude Agent SDK ----
 const sessions = {} // tabId -> resume session_id
 
@@ -119,13 +156,17 @@ ipcMain.handle('send-message', async (e, payload) => {
     ? `\n\nRÔLE NOVA: ${agent.prompt}`
     : ''
 
+  const mcpServers = buildMcpServers()
   const options = {
     cwd: projectPath,
     permissionMode: 'bypassPermissions',
     includePartialMessages: true,
     systemPrompt: { type: 'preset', preset: 'claude_code', append: sysAppend },
   }
-  if (agent?.tools) options.allowedTools = agent.tools
+  if (Object.keys(mcpServers).length) options.mcpServers = mcpServers
+  if (agent?.tools) {
+    options.allowedTools = mcpServers.magic ? [...agent.tools, ...MAGIC_TOOLS] : agent.tools
+  }
   if (sessions[tabId]) options.resume = sessions[tabId]
 
   try {

@@ -2,8 +2,11 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:;" />
   <title>Rec.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -42,6 +45,7 @@
         <div class="agent-list" id="custom-agents"></div>
       </div>
 
+      <button class="side-settings" id="btn-settings">⚙ Réglages · MCP 21st</button>
       <div class="side-foot">© 2026 Nova</div>
     </aside>
 
@@ -89,6 +93,24 @@
       <div class="modal-actions">
         <button class="btn-muted" id="ag-cancel">Annuler</button>
         <button class="btn-primary" id="ag-save">Créer l'agent</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal: settings / MCP -->
+  <div class="modal-overlay" id="settings-modal" style="display:none">
+    <div class="modal">
+      <h3>Réglages</h3>
+      <label>Clé API 21st.dev Magic</label>
+      <input id="set-magic" type="password" placeholder="Active la génération de composants UI" autocomplete="off" />
+      <div class="set-help">
+        MCP <strong>Magic</strong> : Claude génère des composants UI depuis 21st.dev.
+        <a href="https://21st.dev" target="_blank">Obtenir une clé →</a>
+      </div>
+      <div class="set-status" id="set-status"></div>
+      <div class="modal-actions">
+        <button class="btn-muted" id="set-cancel">Fermer</button>
+        <button class="btn-primary" id="set-save">Enregistrer</button>
       </div>
     </div>
   </div>

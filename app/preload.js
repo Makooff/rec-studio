@@ -15,6 +15,10 @@ contextBridge.exposeInMainWorld('api', {
   saveAgent: (projectPath, agent) => ipcRenderer.invoke('save-agent', projectPath, agent),
   deleteAgent: (projectPath, id) => ipcRenderer.invoke('delete-agent', projectPath, id),
 
+  // config / MCP
+  getConfig: () => ipcRenderer.invoke('get-config'),
+  saveConfig: (patch) => ipcRenderer.invoke('save-config', patch),
+
   // chat
   sendMessage: (payload) => ipcRenderer.invoke('send-message', payload),
   resetSession: (tabId) => ipcRenderer.invoke('reset-session', tabId),

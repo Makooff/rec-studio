@@ -185,6 +185,22 @@ function renderMarkdown(md) {
   return h
 }
 
+// ---- settings / MCP 21st ----
+$('btn-settings').onclick = async () => {
+  const cfg = await api.getConfig()
+  $('set-status').innerHTML = cfg.hasMagic
+    ? '<span class="ok">✓ MCP 21st actif</span>'
+    : '<span class="off">○ MCP 21st inactif</span>'
+  $('settings-modal').style.display = 'flex'
+}
+$('set-cancel').onclick = () => { $('settings-modal').style.display = 'none'; $('set-magic').value = '' }
+$('set-save').onclick = async () => {
+  const key = $('set-magic').value.trim()
+  const cfg = await api.saveConfig(key ? { magicKey: key } : {})
+  $('set-status').innerHTML = cfg.hasMagic ? '<span class="ok">✓ MCP 21st actif</span>' : '<span class="off">○ MCP 21st inactif</span>'
+  $('set-magic').value = ''
+}
+
 // external links
 document.addEventListener('click', (e) => {
   const a = e.target.closest('a[href^="http"]')

@@ -33,6 +33,12 @@ Electron
 ## Sessions
 `resume` par tabId via session_id renvoyé dans le message `result`.
 
+## MCP 21st.dev Magic
+Clé Magic (env `MAGIC_API_KEY`/`TWENTYFIRST_API_KEY` ou `rec-config.json` userData) → `options.mcpServers.magic` (npx `@21st-dev/magic`). Tools `mcp__magic__*` ajoutés à `allowedTools` même pour agents restreints. Réglages via modal ⚙ sidebar.
+
+## Design (skills SuperClaude : impeccable + taste)
+Font Sora (corps) + Plus Jakarta Sans (titres). Focus-visible accent. `prefers-reduced-motion`. Message user en bulle surface, assistant plein largeur. Espacement aéré (gap 28px, max-width 720px). Max 2 accents, grain film.
+
 ## Hors scope v1
 - Onglets multiples simultanés (tabId fixé 'main', extensible)
 - Build .dmg Mac (config prête)
