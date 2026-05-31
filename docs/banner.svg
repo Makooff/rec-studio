@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0f0f0f"/>
+      <stop offset="1" stop-color="#161616"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FF3B3B" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FF3B3B" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.04"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="340" rx="0" fill="url(#bg)"/>
+  <ellipse cx="600" cy="200" rx="520" ry="260" fill="url(#glow)"/>
+  <rect width="1200" height="340" filter="url(#grain)" opacity="0.5"/>
+
+  <!-- REC dot -->
+  <circle cx="430" cy="150" r="11" fill="#FF3B3B">
+    <animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="458" y="160" font-family="'Plus Jakarta Sans','Arial Black',sans-serif" font-weight="800" font-size="34" letter-spacing="4" fill="#888">REC</text>
+
+  <!-- Wordmark -->
+  <text x="600" y="195" text-anchor="middle" font-family="'Plus Jakarta Sans','Arial Black',sans-serif" font-weight="800" font-size="110" fill="#f5f5f5" letter-spacing="-3">Rec<tspan fill="#FF3B3B">.</tspan></text>
+
+  <!-- Tagline -->
+  <text x="600" y="240" text-anchor="middle" font-family="'Segoe UI',sans-serif" font-weight="400" font-size="22" fill="#999" letter-spacing="1">On tourne. On convertit.</text>
+
+  <!-- Pills -->
+  <g font-family="'Segoe UI',sans-serif" font-size="14" font-weight="500" fill="#ccc">
+    <g transform="translate(330,278)">
+      <rect width="118" height="34" rx="17" fill="#1c1c1c" stroke="#2e2e2e"/>
+      <text x="59" y="22" text-anchor="middle">Vidéo IA</text>
+    </g>
+    <g transform="translate(458,278)">
+      <rect width="118" height="34" rx="17" fill="#1c1c1c" stroke="#2e2e2e"/>
+      <text x="59" y="22" text-anchor="middle">Ads Meta/Google</text>
+    </g>
+    <g transform="translate(586,278)">
+      <rect width="110" height="34" rx="17" fill="#1c1c1c" stroke="#2e2e2e"/>
+      <text x="55" y="22" text-anchor="middle">Agents IA</text>
+    </g>
+    <g transform="translate(706,278)">
+      <rect width="100" height="34" rx="17" fill="#1c1c1c" stroke="#2e2e2e"/>
+      <text x="50" y="22" text-anchor="middle">Sites web</text>
+    </g>
+    <g transform="translate(816,278)">
+      <rect width="100" height="34" rx="17" fill="#1c1c1c" stroke="#2e2e2e"/>
+      <text x="50" y="22" text-anchor="middle">SEO local</text>
+    </g>
+  </g>
+</svg>

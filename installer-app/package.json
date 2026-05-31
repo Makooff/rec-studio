@@ -12,7 +12,11 @@
     "appId": "com.nova.rec",
     "productName": "Rec.",
     "copyright": "© 2026 Nova",
-    "files": ["**/*", "!dist", "!node_modules/.cache"],
+    "files": [
+      "**/*",
+      "!dist",
+      "!node_modules/.cache"
+    ],
     "win": {
       "target": "nsis",
       "icon": "assets/icon.png"

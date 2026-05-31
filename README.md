@@ -1,62 +1,99 @@
-# Rec.
+<div align="center">
 
-**Assistant Claude Code pour l'équipe Nova.**
+![Rec.](docs/banner.svg)
+
+# Rec. — Studio Claude Code pour Nova
+
+**L'assistant IA de l'agence. Vidéo, Ads, Agents, Sites web, SEO — préconfiguré, prêt en 60 secondes.**
+
+[![Windows](https://img.shields.io/badge/Windows-prêt-FF3B3B?style=flat-square&logo=windows)](https://github.com/Makooff/rec-studio/releases)
+[![macOS](https://img.shields.io/badge/macOS-bientôt-555?style=flat-square&logo=apple)](#)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-inclus-FF3B3B?style=flat-square)](https://claude.ai/code)
+
+</div>
+
+---
+
+## C'est quoi ?
+
+Une **application à installer** qui configure Claude Code pour toute l'équipe Nova. Pas besoin d'être technique : tu cliques, tu choisis ton dossier projet, et Claude connaît déjà tous les services de l'agence.
+
+| Service Nova | Tu dis simplement… |
+|---|---|
+| 🎬 **Spot publicitaire** | *"Crée un spot 30s pour [client], format Reels"* |
+| 📈 **Campagnes Ads** | *"Lance une campagne Meta pour [client], budget 500€"* |
+| 🤖 **Agents IA** | *"Automatise le suivi des leads de [client]"* |
+| 🌐 **Sites web** | *"Fais un site vitrine pour [client]"* |
+| 📍 **SEO local** | *"Optimise le Google Business de [client] à Bruxelles"* |
+
+Aucune commande à retenir. Tu décris, Rec. choisit le bon outil.
+
+---
+
+## Aperçu
+
+<div align="center">
+
+| Bienvenue | Configuration | Installation |
+|:---:|:---:|:---:|
+| ![Welcome](docs/screens/welcome.png) | ![Config](docs/screens/config.png) | ![Install](docs/screens/install.png) |
+| **Choix du projet** | **Prêt** | |
+| ![Projet](docs/screens/project.png) | ![Done](docs/screens/done.png) | |
+
+</div>
 
 ---
 
 ## Installation — 3 étapes
 
-### 1. Télécharger
+### 1️⃣ Télécharger
+Va dans les [**Releases**](https://github.com/Makooff/rec-studio/releases) → télécharge `Rec. Setup 1.0.0.exe`.
 
-Télécharge le fichier `Rec. Setup 1.0.0.exe` dans les [releases](https://github.com/makooff/rec-studio/releases).
+### 2️⃣ Installer
+Double-clic sur le `.exe`. À l'écran **Configuration**, colle tes clés API (toutes optionnelles) :
+- **Pika** → génération vidéo IA → [pika.art/api](https://pika.art/api)
+- **Magic** → composants UI → [21st.dev](https://21st.dev)
+- **Obsidian** → mémoire (laisse vide si tu n'utilises pas)
 
-### 2. Installer
+### 3️⃣ Lancer
+Clique **Choisir le dossier**, sélectionne ton projet → Claude Code s'ouvre, configuré.
 
-Double-clique sur le fichier `.exe` et suis les étapes :
-
-- **Clé Pika** — pour générer des vidéos IA (spots, reels)
-- **Clé Magic** — pour les composants UI
-- **Clé Obsidian** — optionnel, si tu utilises Obsidian
-
-### 3. Ouvrir ton projet
-
-Choisis le dossier de ton projet Nova → Claude Code s'ouvre automatiquement avec toute la config.
+> ✅ Fini. Tu peux parler à Claude en français, comme à un collègue.
 
 ---
 
-## Ce que ça fait
+## Ce qui est inclus
 
-Une fois installé, Claude Code connaît les services Nova :
-
-| Service | Ce que tu peux demander |
-|---|---|
-| **Spot publicitaire** | "Crée un spot pour [client]", "Script 30s pour Meta" |
-| **Campagnes Ads** | "Lance une campagne Meta pour [client]", "Optimise le CPC" |
-| **Agents IA** | "Automatise [tâche]", "Configure un workflow" |
-| **Site web** | "Fais un site pour [client]", "Checklist avant livraison" |
-| **SEO local** | "Optimise le GBP de [client]", "Mots-clés Bruxelles" |
-
-Pas de commandes à retenir. Décris ce que tu veux, Claude comprend et utilise le bon outil.
+- **191 agents** spécialisés (review, debug, sécurité, fullstack…)
+- **Skills Nova sur-mesure** : `ads-production`, `meta-ads`, `ai-agents`, `web-creation`, `seo-local`
+- **Pika + Hyperframes** — vidéo IA & motion design
+- **Mémoire cross-session** (`claude-mem`) — Claude se souvient des projets
+- **Routing automatique** — le bon skill s'active sans mot-clé
 
 ---
 
 ## Prérequis
 
 - Windows 10/11
-- [Claude Code](https://claude.ai/code) installé
-- [Node.js 18+](https://nodejs.org)
-- Clé API Pika (sur pika.art)
+- [Node.js 20+](https://nodejs.org)
+- [Claude Code](https://claude.ai/code)
+
+*(L'installateur vérifie tout et te guide si quelque chose manque.)*
 
 ---
 
-## Pour les développeurs — build local
+## Build local (développeurs)
 
 ```powershell
 # Windows
 .\build.ps1
 
-# Mac
+# macOS
 bash build.sh
 ```
 
-Prérequis build : Node.js 18+, npm.
+---
+
+<div align="center">
+<sub>© 2026 Nova — Bruxelles. On tourne. On convertit.</sub>
+</div>
