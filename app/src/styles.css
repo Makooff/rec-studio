@@ -73,6 +73,34 @@ body::before {
 .tb-btn:hover { background: var(--surface-2); color: var(--text); }
 .tb-btn.close:hover { background: var(--accent); color: #fff; }
 
+/* onboarding gate */
+.onboarding {
+  position: fixed; inset: 40px 0 0 0; z-index: 500; background: var(--bg);
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+}
+.onb-card { width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; }
+.onb-card h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 32px; letter-spacing: -1px; margin-top: 4px; }
+.onb-sub { color: var(--muted); margin: 6px 0 28px; font-size: 14px; text-align: center; }
+.onb-steps { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.onb-step {
+  display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+.onb-step.ok { border-color: rgba(16,185,129,.4); }
+.onb-step.fail { border-color: rgba(255,59,59,.4); }
+.onb-ic { font-size: 16px; width: 20px; text-align: center; color: var(--muted); }
+.onb-step.ok .onb-ic { color: var(--success); }
+.onb-step.fail .onb-ic { color: var(--accent); }
+.onb-name { font-size: 14px; font-weight: 500; }
+.onb-val { font-size: 12px; color: var(--muted); margin-top: 1px; }
+.onb-log {
+  width: 100%; margin-top: 16px; max-height: 150px; overflow-y: auto; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px;
+  font-family: 'Cascadia Code', Consolas, monospace; font-size: 11.5px; color: var(--muted);
+  white-space: pre-wrap; line-height: 1.5;
+}
+.onb-actions { width: 100%; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+
 /* layout */
 .layout { display: flex; height: calc(100vh - 40px); }
 

@@ -15,6 +15,12 @@ contextBridge.exposeInMainWorld('api', {
   saveAgent: (projectPath, agent) => ipcRenderer.invoke('save-agent', projectPath, agent),
   deleteAgent: (projectPath, id) => ipcRenderer.invoke('delete-agent', projectPath, id),
 
+  // first-run env gate
+  checkEnv: () => ipcRenderer.invoke('check-env'),
+  installClaude: () => ipcRenderer.invoke('install-claude'),
+  loginClaude: () => ipcRenderer.invoke('login-claude'),
+  onInstallLog: (cb) => { const fn = (_e, d) => cb(d); ipcRenderer.on('install-log', fn); return () => ipcRenderer.removeListener('install-log', fn) },
+
   // config / MCP
   getConfig: () => ipcRenderer.invoke('get-config'),
   saveConfig: (patch) => ipcRenderer.invoke('save-config', patch),

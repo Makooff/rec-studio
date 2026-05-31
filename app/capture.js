@@ -22,5 +22,23 @@ app.whenReady().then(async () => {
   fs.writeFileSync(path.join(OUT, 'app-chat.png'), (await win.webContents.capturePage()).toPNG())
   console.log('✓ app-chat.png')
 
+  // shot 3: onboarding gate (simulated states)
+  await win.webContents.executeJavaScript(`
+    document.getElementById('onboarding').style.display = 'flex';
+    function S(id,st,val){var e=document.getElementById('step-'+id);e.classList.add(st);
+      e.querySelector('.onb-ic').textContent= st==='ok'?'✓':'✕';
+      document.getElementById('val-'+id).textContent=val;}
+    S('node','ok','v20.11.0');
+    S('claude','ok','2.0.1 (Claude Code)');
+    S('auth','fail','pas connecté');
+    document.getElementById('onb-actions').innerHTML =
+      '<button class="btn-primary">Se connecter à Claude</button>' +
+      '<button class="btn-muted">J\\'ai terminé — Réessayer</button>' +
+      '<p class="onb-sub">Une fenêtre terminal s\\'ouvre. Connecte-toi (Pro/Max), puis reviens et clique « Réessayer ».</p>';
+  `)
+  await new Promise(r => setTimeout(r, 800))
+  fs.writeFileSync(path.join(OUT, 'app-onboarding.png'), (await win.webContents.capturePage()).toPNG())
+  console.log('✓ app-onboarding.png')
+
   app.quit()
 })

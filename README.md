@@ -42,14 +42,19 @@ Nouvelle app desktop : une **interface rouge où tu discutes avec Claude**, sans
 - 🤖 **Agents custom** — crée tes propres agents (nom, rôle, outils) partagés via git
 - 🔒 **Auth abonnement** — réutilise la connexion Claude Code de chaque membre
 
-**Lancer l'app :**
-```bash
+### Installation zéro-prise-de-tête
+
+Au **premier lancement**, Rec. vérifie tout seul Node.js, Claude Code et la connexion — et installe ce qui manque. L'équipe n'a rien à faire dans un terminal.
+
+![Onboarding](docs/screens/app-onboarding.png)
+
+**Pour distribuer un `.exe` à l'équipe :**
+```powershell
 cd app
 npm install
-npm start
+npm run build-win
 ```
-
-Prérequis : [Claude Code](https://claude.ai/code) installé + connecté (plan Pro/Max).
+→ `app\dist\Rec. Setup 1.0.0.exe` — double-clic, comme n'importe quel logiciel.
 
 ---
 

@@ -207,5 +207,57 @@ document.addEventListener('click', (e) => {
   if (a) { e.preventDefault(); api.openExternal(a.href) }
 })
 
+// ---- first-run onboarding gate ----
+function setStep(id, state, val) {
+  const el = $('step-' + id)
+  el.classList.remove('ok', 'fail')
+  if (state) el.classList.add(state)
+  el.querySelector('.onb-ic').textContent = state === 'ok' ? '✓' : state === 'fail' ? '✕' : '○'
+  $('val-' + id).textContent = val
+}
+
+async function runGate() {
+  $('onboarding').style.display = 'flex'
+  const env = await api.checkEnv()
+  setStep('node', env.node ? 'ok' : 'fail', env.node || 'introuvable — installe Node.js')
+  setStep('claude', env.claude ? 'ok' : 'fail', env.claude || 'pas installé')
+  setStep('auth', env.authed ? 'ok' : 'fail', env.authed ? 'connecté' : 'pas connecté')
+
+  const actions = $('onb-actions'); actions.innerHTML = ''
+
+  if (!env.node) {
+    const a = btn('Installer Node.js', 'btn-primary', () => api.openExternal('https://nodejs.org/fr/download'))
+    actions.appendChild(a)
+    actions.appendChild(btn('Réessayer', 'btn-muted', runGate))
+    return
+  }
+  if (!env.claude) {
+    actions.appendChild(btn('Installer Claude Code', 'btn-primary', installClaude))
+    actions.appendChild(btn('Réessayer', 'btn-muted', runGate))
+    return
+  }
+  if (!env.authed) {
+    actions.appendChild(btn('Se connecter à Claude', 'btn-primary', async () => { await api.loginClaude(); }))
+    actions.appendChild(btn('J\'ai terminé — Réessayer', 'btn-muted', runGate))
+    const hint = el('p', 'onb-sub', 'Une fenêtre terminal s\'ouvre. Connecte-toi avec ton compte (Pro/Max), puis reviens et clique « Réessayer ».')
+    actions.appendChild(hint)
+    return
+  }
+  // all good
+  actions.appendChild(btn('Entrer dans Rec.', 'btn-primary', () => { $('onboarding').style.display = 'none' }))
+}
+
+async function installClaude() {
+  const log = $('onb-log'); log.style.display = 'block'; log.textContent = '› Installation de Claude Code…\n'
+  $('onb-actions').innerHTML = '<div class="onb-sub">Installation en cours…</div>'
+  const off = api.onInstallLog((d) => { log.textContent += d.text; log.scrollTop = log.scrollHeight })
+  await api.installClaude()
+  off()
+  runGate()
+}
+
+function btn(label, cls, onclick) { const b = el('button', cls, label); b.onclick = onclick; return b }
+
 // init
+runGate()
 refreshProjects()

@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron')
 const path = require('path')
 const fs = require('fs')
 const os = require('os')
+const { spawn, exec } = require('child_process')
 
 let win
 let sdk = null // lazy-loaded ESM SDK
@@ -37,6 +38,47 @@ app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) creat
 // ---- window controls ----
 ipcMain.on('win-minimize', () => win?.minimize())
 ipcMain.on('win-close', () => win?.close())
+
+// ---- first-run environment gate ----
+function cmdVersion(cmd) {
+  return new Promise((res) => {
+    exec(`${cmd} --version`, { timeout: 9000 }, (err, out) => res(err ? null : String(out).trim().split('\n')[0]))
+  })
+}
+
+ipcMain.handle('check-env', async () => {
+  const node = await cmdVersion('node')
+  const claude = await cmdVersion('claude')
+  // auth: Claude Code stores credentials under ~/.claude
+  let authed = false
+  try {
+    const base = path.join(os.homedir(), '.claude')
+    authed = fs.existsSync(path.join(base, '.credentials.json')) ||
+             fs.existsSync(path.join(base, 'config.json'))
+  } catch {}
+  return { node, claude, authed }
+})
+
+ipcMain.handle('install-claude', (e) => new Promise((resolve) => {
+  const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm'
+  const p = spawn(npm, ['install', '-g', '@anthropic-ai/claude-code'], { shell: true })
+  p.stdout.on('data', d => e.sender.send('install-log', { text: d.toString() }))
+  p.stderr.on('data', d => e.sender.send('install-log', { text: d.toString() }))
+  p.on('close', (code) => resolve({ code }))
+  p.on('error', (err) => { e.sender.send('install-log', { text: 'Erreur: ' + err.message }); resolve({ code: 1 }) })
+}))
+
+ipcMain.handle('login-claude', () => {
+  // open an interactive terminal running `claude` so the user can log in (browser flow)
+  if (process.platform === 'win32') {
+    spawn('cmd', ['/c', 'start', 'cmd', '/k', 'claude'], { shell: true, detached: true })
+  } else if (process.platform === 'darwin') {
+    spawn('osascript', ['-e', 'tell app "Terminal" to do script "claude"'], { detached: true })
+  } else {
+    spawn('sh', ['-c', 'claude'], { detached: true })
+  }
+  return true
+})
 
 // ---- recent projects store ----
 const storePath = path.join(app.getPath('userData'), 'rec-projects.json')

@@ -23,6 +23,34 @@
     </div>
   </div>
 
+  <!-- first-run onboarding gate -->
+  <div class="onboarding" id="onboarding" style="display:none">
+    <div class="onb-card">
+      <span class="rec-dot big"></span>
+      <h2>Bienvenue sur Rec<span class="accent">.</span></h2>
+      <p class="onb-sub">Premier lancement — vérification de Claude Code.</p>
+
+      <div class="onb-steps">
+        <div class="onb-step" id="step-node">
+          <span class="onb-ic">○</span>
+          <div><div class="onb-name">Node.js</div><div class="onb-val" id="val-node">vérification…</div></div>
+        </div>
+        <div class="onb-step" id="step-claude">
+          <span class="onb-ic">○</span>
+          <div><div class="onb-name">Claude Code</div><div class="onb-val" id="val-claude">vérification…</div></div>
+        </div>
+        <div class="onb-step" id="step-auth">
+          <span class="onb-ic">○</span>
+          <div><div class="onb-name">Connexion abonnement</div><div class="onb-val" id="val-auth">vérification…</div></div>
+        </div>
+      </div>
+
+      <div class="onb-log" id="onb-log" style="display:none"></div>
+
+      <div class="onb-actions" id="onb-actions"></div>
+    </div>
+  </div>
+
   <div class="layout">
     <!-- sidebar -->
     <aside class="sidebar">
