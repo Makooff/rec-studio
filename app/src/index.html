@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <title>Rec.</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- titlebar -->
+  <div class="titlebar">
+    <div class="tb-left">
+      <span class="rec-dot"></span>
+      <span class="tb-title">Rec<span class="accent">.</span></span>
+      <span class="tb-project" id="tb-project"></span>
+    </div>
+    <div class="tb-controls">
+      <button class="tb-btn" id="btn-min">−</button>
+      <button class="tb-btn close" id="btn-close">✕</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- sidebar -->
+    <aside class="sidebar">
+      <div class="side-section">
+        <div class="side-head">Projet</div>
+        <button class="side-project" id="btn-pick">＋ Choisir un dossier</button>
+        <div class="project-list" id="project-list"></div>
+      </div>
+
+      <div class="side-section">
+        <div class="side-head">Agents Nova</div>
+        <div class="agent-list" id="nova-agents"></div>
+      </div>
+
+      <div class="side-section">
+        <div class="side-head">
+          Agents custom
+          <button class="side-add" id="btn-new-agent" title="Créer un agent">＋</button>
+        </div>
+        <div class="agent-list" id="custom-agents"></div>
+      </div>
+
+      <div class="side-foot">© 2026 Nova</div>
+    </aside>
+
+    <!-- main chat -->
+    <main class="chat">
+      <div class="chat-empty" id="chat-empty">
+        <span class="rec-dot big"></span>
+        <h2>Rec<span class="accent">.</span></h2>
+        <p id="empty-hint">Choisis un dossier projet pour commencer.</p>
+      </div>
+
+      <div class="messages" id="messages"></div>
+
+      <div class="composer" id="composer" style="display:none">
+        <div class="active-agent" id="active-agent"></div>
+        <div class="composer-row">
+          <textarea id="input" rows="1" placeholder="Écris à Claude…"></textarea>
+          <button class="send-btn" id="btn-send" title="Envoyer">→</button>
+        </div>
+        <div class="composer-hint">Entrée = envoyer · Maj+Entrée = nouvelle ligne</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- modal: create agent -->
+  <div class="modal-overlay" id="agent-modal" style="display:none">
+    <div class="modal">
+      <h3>Nouvel agent custom</h3>
+      <label>Nom</label>
+      <input id="ag-name" placeholder="Ex: Closer Nova" />
+      <label>Icône (emoji)</label>
+      <input id="ag-icon" placeholder="🤖" maxlength="2" />
+      <label>System prompt (rôle)</label>
+      <textarea id="ag-prompt" rows="5" placeholder="Tu es… Tu fais…"></textarea>
+      <label>Outils</label>
+      <div class="tool-checks" id="ag-tools">
+        <label><input type="checkbox" value="Read" checked> Lire fichiers</label>
+        <label><input type="checkbox" value="Write" checked> Écrire fichiers</label>
+        <label><input type="checkbox" value="Edit" checked> Modifier fichiers</label>
+        <label><input type="checkbox" value="Bash"> Terminal</label>
+        <label><input type="checkbox" value="Glob" checked> Recherche fichiers</label>
+        <label><input type="checkbox" value="Grep" checked> Recherche contenu</label>
+        <label><input type="checkbox" value="WebSearch"> Web</label>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-muted" id="ag-cancel">Annuler</button>
+        <button class="btn-primary" id="ag-save">Créer l'agent</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

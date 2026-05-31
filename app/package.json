@@ -1,0 +1,27 @@
+{
+  "name": "rec-studio-app",
+  "version": "1.0.0",
+  "description": "Rec. — App chat Claude pour Nova",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac"
+  },
+  "build": {
+    "appId": "com.nova.rec.app",
+    "productName": "Rec.",
+    "copyright": "© 2026 Nova",
+    "files": ["**/*", "!dist"],
+    "win": { "target": "nsis", "icon": "assets/icon.png" },
+    "mac": { "target": "dmg", "icon": "assets/icon.icns" },
+    "nsis": { "oneClick": true, "perMachine": false }
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.0.0"
+  }
+}

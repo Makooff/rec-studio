@@ -30,6 +30,29 @@ Aucune commande à retenir. Tu décris, Rec. choisit le bon outil.
 
 ---
 
+## 🆕 Rec. App — chat direct avec Claude
+
+Nouvelle app desktop : une **interface rouge où tu discutes avec Claude**, sans terminal. Utilise **ton abonnement Claude** (plan Pro/Max via Claude Code — zéro clé API, zéro coût au token).
+
+![Rec. App](docs/screens/app-chat.png)
+
+- 💬 **Chat streaming** — réponses token par token, tool calls visibles
+- 🗂️ **Multi-projets** — chaque dossier garde sa config `.claude/` + mémoire
+- 🎬 **Agents Nova en 1 clic** — Spot, Ads, Site, SEO préconfigurés
+- 🤖 **Agents custom** — crée tes propres agents (nom, rôle, outils) partagés via git
+- 🔒 **Auth abonnement** — réutilise la connexion Claude Code de chaque membre
+
+**Lancer l'app :**
+```bash
+cd app
+npm install
+npm start
+```
+
+Prérequis : [Claude Code](https://claude.ai/code) installé + connecté (plan Pro/Max).
+
+---
+
 ## Aperçu
 
 <div align="center">
