@@ -56,7 +56,7 @@ cd app
 npm install
 npm run build-win
 ```
-→ `app\dist\Rec. Setup 1.0.0.exe` — double-clic, comme n'importe quel logiciel.
+→ `app\dist\Rec.Setup.1.0.0.exe` — double-clic, comme n'importe quel logiciel.
 
 ---
 
@@ -77,18 +77,23 @@ npm run build-win
 ## Installation — 3 étapes
 
 ### 1️⃣ Télécharger
-Va dans les [**Releases**](https://github.com/Makooff/rec-studio/releases) → télécharge `Rec. Setup 1.0.0.exe`.
+[**Releases**](https://github.com/Makooff/rec-studio/releases/latest) → `Rec.Setup.1.0.0.exe`.
 
 ### 2️⃣ Installer
-Double-clic sur le `.exe`. À l'écran **Configuration**, colle tes clés API (toutes optionnelles) :
-- **Pika** → génération vidéo IA → [pika.art/api](https://pika.art/api)
-- **Magic** → composants UI → [21st.dev](https://21st.dev)
-- **Obsidian** → mémoire (laisse vide si tu n'utilises pas)
+Double-clic sur le `.exe`. Au premier lancement, Rec. vérifie automatiquement :
+- **Node.js** — installé si manquant
+- **Claude Code** — bouton « Installer Claude Code »
+- **Connexion abonnement** — bouton « Se connecter » (Pro/Max, fenêtre terminal s'ouvre)
 
-### 3️⃣ Lancer
-Clique **Choisir le dossier**, sélectionne ton projet → Claude Code s'ouvre, configuré.
+Une fois les 3 ✓ verts → **Entrer dans Rec.**
 
-> ✅ Fini. Tu peux parler à Claude en français, comme à un collègue.
+### 3️⃣ Discuter
+**＋ Choisir un dossier** → sélectionne le projet client.
+Clique un agent Nova (🎬 Spot / 📈 Ads / 🌐 Site / 📍 SEO) → tape ton message → Entrée.
+
+> ✅ Aucune clé API. Aucun coût au token. Ton abonnement Claude Pro/Max suffit.
+
+**Optionnel — MCP 21st (UI generation)** : ⚙ Réglages → colle ta clé [21st.dev](https://21st.dev).
 
 ---
 
@@ -135,7 +140,7 @@ cd app
 npm install
 npm run build-win
 ```
-→ `app\dist\Rec. Setup 1.0.0.exe`
+→ `app\dist\Rec.Setup.1.0.0.exe`
 
 **2. Publie sur GitHub Releases :**
 - Page repo → **Releases** → **Draft a new release**
