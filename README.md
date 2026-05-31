@@ -129,26 +129,27 @@ npm run build-mac   # macOS .dmg
 
 ## Déploiement (publier une version pour l'équipe)
 
-Le déploiement est **automatique** via GitHub Actions. Push un tag → le `.exe` et le `.dmg` se build seuls et apparaissent dans [Releases](https://github.com/Makooff/rec-studio/releases).
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
+**1. Build le `.exe` en local :**
+```powershell
+cd app
+npm install
+npm run build-win
 ```
+→ `app\dist\Rec. Setup 1.0.0.exe`
 
-→ GitHub build Windows + macOS, publie les fichiers. L'équipe télécharge le `.exe` depuis la page Releases.
+**2. Publie sur GitHub Releases :**
+- Page repo → **Releases** → **Draft a new release**
+- Tag `v1.0.0`, titre `Rec. v1.0.0`
+- Glisse le `.exe` dans la zone fichiers → **Publish release**
+
+L'équipe télécharge depuis [Releases](https://github.com/Makooff/rec-studio/releases/latest).
 
 **Mettre à jour le code du repo :**
 ```bash
-git add -A
-git commit -m "feat: ma modif"
-git push origin main
+git add -A && git commit -m "feat: ma modif" && git push origin main
 ```
 
-**Nouvelle version à distribuer :** incrémente la version dans `app/package.json`, commit, puis tag :
-```bash
-git tag v1.0.1 && git push origin v1.0.1
-```
+**Nouvelle version :** bump la version dans `app/package.json`, rebuild, nouvelle Release.
 
 ---
 
