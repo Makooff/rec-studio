@@ -1,0 +1,33 @@
+{
+  "name": "rec-studio",
+  "version": "1.0.0",
+  "description": "Rec. — Studio Claude Code pour Nova",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac"
+  },
+  "build": {
+    "appId": "com.nova.rec",
+    "productName": "Rec.",
+    "copyright": "© 2026 Nova",
+    "files": ["**/*", "!dist", "!node_modules/.cache"],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false
+    }
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.0.0"
+  }
+}

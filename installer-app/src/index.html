@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rec. Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Title Bar -->
+    <div class="titlebar">
+      <span class="titlebar-title">Rec. Studio — Nova</span>
+      <div class="titlebar-controls">
+        <button class="titlebar-btn" id="btn-minimize" title="Minimiser">−</button>
+        <button class="titlebar-btn close" id="btn-close" title="Fermer">✕</button>
+      </div>
+    </div>
+
+    <div class="screens-container">
+
+      <!-- ====== Screen 1: Welcome ====== -->
+      <div class="screen active" id="screen-1">
+        <span class="welcome-icon">⬤</span>
+        <div class="welcome-logo">Rec<span class="accent">.</span></div>
+        <div class="welcome-subtitle">Votre assistant Claude Code pour Nova.<br>Configuré et prêt en 60 secondes.</div>
+
+        <div class="features-list">
+          <div class="feature-item">
+            <span class="feature-icon">✦</span>
+            <span>Production vidéo & ads IA</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✦</span>
+            <span>Agents IA préconfigurés</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">✦</span>
+            <span>Mémoire cross-session</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="btn-start">
+          Commencer →
+        </button>
+      </div>
+
+      <!-- ====== Screen 2: Prerequisites ====== -->
+      <div class="screen" id="screen-2">
+        <div class="screen-title">Vérification</div>
+        <div class="screen-subtitle">Vérification des outils requis</div>
+
+        <div class="checks-list" id="checks-list">
+          <!-- Items inserted by JS -->
+        </div>
+
+        <div class="prereq-links" id="prereq-links">
+          <div style="font-size:12px; color: var(--warning); font-weight:500; margin-bottom:4px;">Outils manquants :</div>
+          <a class="prereq-link" id="link-node" href="#" style="display:none">
+            → Installer Node.js 20+ — nodejs.org/en/download
+          </a>
+          <a class="prereq-link" id="link-claude" href="#" style="display:none">
+            → Installer Claude Code — claude.ai/code
+          </a>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div id="prereq-actions" style="display:none; flex-direction:column; gap:10px;">
+          <button class="btn btn-primary" id="btn-retry">
+            Réessayer
+          </button>
+          <button class="btn btn-muted" id="btn-skip-prereq">
+            Continuer quand même →
+          </button>
+        </div>
+      </div>
+
+      <!-- ====== Screen 3: Configuration ====== -->
+      <div class="screen" id="screen-3">
+        <div class="screen-title">Configuration</div>
+        <div class="screen-subtitle">Clés API pour les outils Nova (tout optionnel)</div>
+
+        <div class="form-group">
+          <div class="form-label">
+            Pika API Key
+            <span class="optional-badge">optionnel</span>
+          </div>
+          <input
+            class="form-input"
+            id="input-pika-key"
+            type="password"
+            placeholder="pk-..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="form-help">
+            Génère des vidéos / spots publicitaires IA avec Pika.
+            <a href="https://pika.art/api" target="_blank">Obtenir une clé →</a>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">
+            Magic API Key
+            <span class="optional-badge">optionnel</span>
+          </div>
+          <input
+            class="form-input"
+            id="input-magic-key"
+            type="password"
+            placeholder="sk-..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="form-help">
+            Génère des composants UI avec 21st.dev Magic.
+            <a href="https://21st.dev" target="_blank">Obtenir une clé →</a>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">
+            Obsidian API Key
+            <span class="optional-badge">optionnel</span>
+          </div>
+          <input
+            class="form-input"
+            id="input-obsidian-key"
+            type="password"
+            placeholder="xxxxx"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="form-help">
+            Mémoire cross-session via Obsidian. Laisser vide pour ignorer.
+          </div>
+        </div>
+
+        <div class="form-checkbox-group" id="checkbox-group">
+          <input type="checkbox" id="check-open-claude" checked />
+          <label for="check-open-claude">Ouvrir Claude Code après installation</label>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="config-buttons">
+          <button class="btn btn-primary" id="btn-install">
+            Installer →
+          </button>
+          <button class="btn btn-muted" id="btn-skip-config">
+            Passer →
+          </button>
+        </div>
+      </div>
+
+      <!-- ====== Screen 4: Installation ====== -->
+      <div class="screen" id="screen-4">
+        <div class="screen-title">Installation...</div>
+
+        <div class="progress-wrap">
+          <div class="progress-header">
+            <span class="progress-step-label" id="step-label">Initialisation...</span>
+            <span class="progress-percent" id="step-percent">0%</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="log-area" id="log-area">
+          <span class="log-line info">› Rec. — démarrage configuration...</span>
+        </div>
+      </div>
+
+      <!-- ====== Screen 5: Project picker ====== -->
+      <div class="screen" id="screen-5">
+        <div class="screen-content">
+          <div class="logo-mark">🎬</div>
+          <h2 class="screen-title">Choisir le projet</h2>
+          <p class="screen-subtitle">Rec. copiera la configuration Claude dans ce dossier et ouvrira l'agent.</p>
+          <button class="btn btn-primary" id="btn-pick-folder">Choisir le dossier →</button>
+          <div class="project-path" id="project-path" style="display:none"></div>
+          <button class="btn btn-primary" id="btn-setup-project" style="display:none;margin-top:4px">Configurer ce projet & ouvrir Claude</button>
+          <div class="project-log" id="project-log"></div>
+        </div>
+      </div>
+
+      <!-- ====== Screen 6: Done ====== -->
+      <div class="screen" id="screen-6">
+        <div class="checkmark-wrap">
+          <svg class="checkmark-svg" viewBox="0 0 80 80">
+            <circle class="checkmark-circle" cx="40" cy="40" r="35" />
+            <path class="checkmark-path" d="M24 40 L35 51 L56 29" />
+          </svg>
+        </div>
+
+        <div class="done-title">Rec. prêt.</div>
+        <div class="done-subtitle">Claude Code est configuré pour l'agence.</div>
+
+        <div class="done-buttons">
+          <button class="btn btn-success" id="btn-open-claude">
+            Ouvrir Claude Code
+          </button>
+          <button class="btn btn-muted" id="btn-close-done">
+            Fermer
+          </button>
+        </div>
+
+        <div class="done-hint">
+          Prochain projet : copier <code style="color:var(--accent)">.claude/</code> + <code style="color:var(--accent)">CLAUDE.md</code> dans ton dossier
+        </div>
+      </div>
+
+    </div><!-- /screens-container -->
+  </div><!-- /app -->
+
+  <script src="renderer.js"></script>
+</body>
+</html>
